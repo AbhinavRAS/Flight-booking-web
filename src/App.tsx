@@ -1,6 +1,6 @@
-import React from 'react';
-import { Plane } from 'lucide-react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Plane, User } from 'lucide-react';
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import SearchForm from './components/SearchForm';
 import FeaturedDeals from './components/FeaturedDeals';
 import Flights from './pages/Flights';
@@ -8,8 +8,11 @@ import Hotels from './pages/Hotels';
 import CarRentals from './pages/CarRentals';
 import Deals from './pages/Deals';
 import TouristSpots from './pages/TouristSpots';
+import SignIn from './pages/SignIn';
 
 function App() {
+  const [isSignedIn, setIsSignedIn] = useState(false);
+
   return (
     <Router>
       <div className="min-h-screen bg-gray-50">
@@ -29,10 +32,30 @@ function App() {
                 <Link to="/tourist-spots" className="text-gray-600 hover:text-gray-900">Tourist Spots</Link>
               </nav>
               <div className="flex items-center space-x-4">
-                <button className="text-gray-600 hover:text-gray-900">Sign In</button>
-                <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                  Sign Up
-                </button>
+                {isSignedIn ? (
+                  <div className="flex items-center space-x-4">
+                    <button className="flex items-center text-gray-600 hover:text-gray-900">
+                      <User className="h-5 w-5 mr-1" />
+                      <span>My Account</span>
+                    </button>
+                    <button 
+                      onClick={() => setIsSignedIn(false)}
+                      className="text-gray-600 hover:text-gray-900"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex items-center space-x-4">
+                    <Link to="/signin" className="text-gray-600 hover:text-gray-900">Sign In</Link>
+                    <Link
+                      to="/signin"
+                      className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                    >
+                      Sign Up
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -45,6 +68,7 @@ function App() {
           <Route path="/car-rentals" element={<CarRentals />} />
           <Route path="/deals" element={<Deals />} />
           <Route path="/tourist-spots" element={<TouristSpots />} />
+          <Route path="/signin" element={<SignIn />} />
         </Routes>
 
         {/* Footer */}

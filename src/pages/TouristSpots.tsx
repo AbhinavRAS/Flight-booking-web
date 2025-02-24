@@ -1,4 +1,5 @@
 import React from 'react';
+import AnimatedSection from '../components/AnimatedSection';
 import TouristSpots from '../components/TouristSpots';
 
 export default function TouristSpotsPage() {
@@ -15,19 +16,25 @@ export default function TouristSpotsPage() {
         </div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-          <div className="text-center">
+          <AnimatedSection animation="slideUp" className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
               Top Tourist Destinations
             </h1>
             <p className="mt-4 text-xl text-gray-200">
               Explore the world's most beautiful and popular tourist spots
             </p>
-          </div>
+          </AnimatedSection>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <TouristSpots />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+        <AnimatedSection animation="fadeIn" className="mb-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-2">Popular Tourist Spots</h2>
+          <p className="text-gray-600 text-lg">Discover amazing destinations around the world</p>
+        </AnimatedSection>
+        <AnimatedSection animation="fadeIn" delay={0.2}>
+          <TouristSpots />
+        </AnimatedSection>
       </div>
     </div>
   );
